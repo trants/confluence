@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://walruship-repository.s3.ap-southeast-1.amazonaws.com/images/confluence-logo.png" alt="Confluence Logo">
+	<img src="docs/confluence.png" alt="Confluence">
 </p>
 
 This project comes as a pre-built docker image that enables you to easily installation Confluence without having to know too much about setup Confluence.
@@ -11,7 +11,6 @@ This project comes as a pre-built docker image that enables you to easily instal
 - Provides a java-based command line keygen, which is more convenient to use in a terminal environment.
 
 ## Quick Setup
-
 1. Install Docker and Docker-Compose
 - [Docker Install documentation](https://docs.docker.com/install/)
 - [Docker-Compose Install documentation](https://docs.docker.com/compose/install/)
@@ -36,12 +35,13 @@ JVM_MAXIMUM_MEMORY=12g
 JVM_MINIMUM_MEMORY=1g
 TZ=UTC
 PORT=8090
+VERSION=8.5.3
 
 # MySQL
+MYSQL_USER=user
 MYSQL_DATABASE=database
 MYSQL_PASSWORD=password
 MYSQL_ROOT_PASSWORD=rootpassword
-MYSQL_USER=user
 
 # Backup
 SCHEDULE=@weekly
@@ -51,11 +51,8 @@ S3_BUCKET=my-s3-bucket
 S3_PREFIX=prefix
 S3_REGION=us-east-1
 S3_SECRET_ACCESS_KEY=BNcXdm18XMctzMH87PZLm8UoP6WlegcPvsQbF5TH
-MYSQL_DATABASE=database
-MYSQL_HOST=mysql
-MYSQL_PASSWORD=password
-MYSQL_USER=user
 PASSPHRASE=wxHw26GJZQBDenA8
+MYSQL_HOST=mysql
 ```
 4. Start confluence
 ```shell
@@ -73,7 +70,7 @@ docker exec confluence java -jar /var/agent/atlassian-agent.jar \
     -s you-server-id-xxxx
 ```
 
-## How to hack confluence plugin
+## How to hack Confluence plugin
 - Example I want to use BigGantt plugin
 1. Install BigGantt from confluence marketplace.
 2. Find `App Key` of BigGantt is : `eu.softwareplant.biggantt`
@@ -91,7 +88,6 @@ docker exec confluence java -jar /var/agent/atlassian-agent.jar \
 
 
 ## How to upgrade
-
 ```shell
 cd confluence && git pull
 docker pull trants/confluence:latest && docker-compose stop

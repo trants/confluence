@@ -27,12 +27,12 @@ services:
   mysql:
     container_name: confluence-db
     restart: unless-stopped
-    image: mysql:8.0
+    image: mysql:8.2
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE:-database}
+      - MYSQL_USER=${MYSQL_USER:-user}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rootpassword}
-      - MYSQL_USER=${MYSQL_USER:-user}
       - TZ=${TZ:-UTC}
     command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--transaction-isolation=READ-COMMITTED', '--innodb_log_file_size=256M', '--max_allowed_packet=256M','--log_bin_trust_function_creators=1' ]
     volumes:
@@ -43,20 +43,20 @@ services:
   backup:
     container_name: confluence-backup
     restart: unless-stopped
-    image: walruship/mysql-backup-s3:latest
+    image: walruship/mysql-backup-s3:8.2
     environment:
       - SCHEDULE=${SCHEDULE:-@weekly}
       - BACKUP_KEEP_DAYS=${BACKUP_KEEP_DAYS:-7}
-      - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID:-Key}
+      - PASSPHRASE=${PASSPHRASE:-Passphrase}
+      - S3_REGION=${S3_REGION:-Region}
       - S3_BUCKET=${S3_BUCKET:-Bucket}
       - S3_PREFIX=${S3_PREFIX:-Prefix}
-      - S3_REGION=${S3_REGION:-Region}
+      - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID:-Key}
       - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY:-Secret}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-Database}
+      - MYSQL_USER=${MYSQL_USER:-User}
       - MYSQL_HOST=${MYSQL_HOST:-MySQL}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-Password}
-      - MYSQL_USER=${MYSQL_USER:-User}
-      - PASSPHRASE=${PASSPHRASE:-Passphrase}
     depends_on:
       - mysql
     networks:
