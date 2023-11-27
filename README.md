@@ -25,6 +25,8 @@ git clone https://github.com/trants/confluence.git \
 3. Edit environment variable
 ```bash
 # Confluence
+VERSION=8.5.3
+PORT=8090
 ATL_PROXY_NAME=localhost
 ATL_PROXY_PORT=443
 ATL_TOMCAT_PORT=8090
@@ -34,8 +36,6 @@ JVM_CODE_CACHE_ARGS="-XX:InitialCodeCacheSize=1g -XX:ReservedCodeCacheSize=8g"
 JVM_MAXIMUM_MEMORY=12g
 JVM_MINIMUM_MEMORY=1g
 TZ=UTC
-PORT=8090
-VERSION=8.5.3
 
 # MySQL
 MYSQL_USER=user
@@ -46,12 +46,12 @@ MYSQL_ROOT_PASSWORD=rootpassword
 # Backup
 SCHEDULE=@weekly
 BACKUP_KEEP_DAYS=7
-S3_ACCESS_KEY_ID=AKIA3M3ZKBJPQUBT2UK6
-S3_BUCKET=my-s3-bucket
-S3_PREFIX=prefix
-S3_REGION=us-east-1
-S3_SECRET_ACCESS_KEY=BNcXdm18XMctzMH87PZLm8UoP6WlegcPvsQbF5TH
 PASSPHRASE=wxHw26GJZQBDenA8
+S3_BUCKET=my-s3-bucket
+S3_REGION=us-east-1
+S3_PREFIX=prefix
+S3_ACCESS_KEY_ID=AKIA3M3ZKBJPQUBT2UK6
+S3_SECRET_ACCESS_KEY=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
 MYSQL_HOST=mysql
 ```
 4. Start confluence
